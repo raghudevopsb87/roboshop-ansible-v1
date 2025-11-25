@@ -24,3 +24,26 @@
         name: '@nginx:1.24'
         state: present
 
+    - name: Remove default html directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: absent
+
+    - name: Create default html directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
+
+    - name: Download and extract app content
+      ansible.builtin.unarchive:
+        src: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+        dest: /usr/share/nginx/html
+        remote_src: yes
+
+    - name: Start nginx service
+      ansible.builtin.systemd_service:
+        state: restarted
+        name: nginx
+        enabled: true
+
+
