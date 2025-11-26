@@ -12,10 +12,10 @@
         name: mysql-server
         state: present
 
-    - name: Start MongoDB service
+    - name: Start MySQl Server service
       ansible.builtin.systemd_service:
         state: restarted
-        name: mongod
+        name: mysqld
         enabled: true
 
     - name: Setup MySQL Root Password
