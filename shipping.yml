@@ -60,36 +60,14 @@
         name: mysql
         state: present
 
-#mysql -h mysql-dev.rdevopsb87.online -uroot -pRoboShop@1 < /app/db/schema.sql
-#mysql -h mysql-dev.rdevopsb87.online -uroot -pRoboShop@1 < /app/db/app-user.sql
-#mysql -h mysql-dev.rdevopsb87.online -uroot -pRoboShop@1 < /app/db/master-data.sql
-
     - name: Load schema
-      community.mysql.mysql_db:
-        state: import
-        name: all
-        target: /app/db/schema.sql
-        login_user: root
-        login_password: RoboShop@1
-        login_host: mysql-dev.rdevopsb87.online
+      ansible.builtin.shell: mysql -h mysql-dev.rdevopsb87.online -uroot -pRoboShop@1 < /app/db/schema.sql
 
-    - name: Load users setup
-      community.mysql.mysql_db:
-        state: import
-        name: all
-        target: /app/db/app-user.sql
-        login_user: root
-        login_password: RoboShop@1
-        login_host: mysql-dev.rdevopsb87.online
+    - name: Load user
+      ansible.builtin.shell: mysql -h mysql-dev.rdevopsb87.online -uroot -pRoboShop@1 < /app/db/app-user.sql
 
-    - name: Load Master Data
-      community.mysql.mysql_db:
-        state: import
-        name: all
-        target: /app/db/master-data.sql
-        login_user: root
-        login_password: RoboShop@1
-        login_host: mysql-dev.rdevopsb87.online
+    - name: Load master data
+      ansible.builtin.shell: mysql -h mysql-dev.rdevopsb87.online -uroot -pRoboShop@1 < /app/db/master-data.sql
 
     - name: Copy shipping service file
       ansible.builtin.copy:
