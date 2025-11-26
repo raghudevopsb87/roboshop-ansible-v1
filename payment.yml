@@ -52,6 +52,7 @@
     - name: Install specified python requirements
       ansible.builtin.pip:
         requirements: /app/requirements.txt
+        executable: pip3
 
     - name: Copy payment service file
       ansible.builtin.copy:
